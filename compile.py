@@ -80,7 +80,7 @@ def parse_tab(text: list[str]) -> DiceTable:
 
         # Table data
         else:
-            # This means create a new table
+            # This means create a new table filled with defaults
             if line == "---":
                 tables.append(
                     {
@@ -100,7 +100,8 @@ def parse_tab(text: list[str]) -> DiceTable:
 
     table.tables = tuple(tables)
 
-    print(table.name, table.dice, table.tables)
+    # print(table.name, table.dice, table.tables)
+
     return table
 
 
@@ -111,14 +112,18 @@ def main(files: list[str]):
     """
     tables = list()
 
+    # Parse tables
     for fn in files:
         with open(fn, "r") as file:
             # Preemptively remove any spaces and new lines to make everything
             # easier later on
             text = file.readlines()
 
-        table = parse_tab(text)
-        tables.append(table)
+        tables.append(parse_tab(text))
+
+    # Turn them into C code
+    for table in tables:
+        
 
     return tables
 
