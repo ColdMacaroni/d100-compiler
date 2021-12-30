@@ -3,7 +3,6 @@
 # A program to compile d100 tables into small C programs
 # 2021-12-31
 
-# To get arguments
 import sys
 
 # TODO: Convert to C program
@@ -18,6 +17,21 @@ import sys
 #   Read through the table, using the left side of the TAB as index
 #   Do this till the end
 #   XXX: Temporary. Just print it out to the terminal to make sure it's fine
+
+class DiceTable:
+    name: str
+    dice: tuple[int]
+    tables: tuple[dict[int, str]]
+
+    def __init__(self,
+            name: str = None,
+            dice: tuple[int] = None,
+            tables: tuple[dict[int, str]] = None
+    ):
+        self.name = name
+        self.dice = dice
+        self.tables = tables
+
 
 def main(files: list[str]):
     """
