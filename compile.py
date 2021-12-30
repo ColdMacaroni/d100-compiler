@@ -8,7 +8,11 @@ import sys
 #---------#
 # GLOBALS #
 #---------#
+# For commenting out lines in .tab
 COMMENT_CHAR = '#'
+
+# For values which are not defined in the table
+DEFAULT_VALUE = 'something'
 
 # TODO: Convert to C program
 # TODO: Do this by going through directory and sub directories.
@@ -48,6 +52,8 @@ def parse_tab(text: list[str]) -> DiceTable:
     #   Table name, Dice needed, The tables for each die.
     table = DiceTable()
 
+    # where all the data will be stored
+    tables = list()
     for line in text:
         # Get rid of extra spaces and new lines for easier handling.
         line = line.strip()
@@ -72,7 +78,29 @@ def parse_tab(text: list[str]) -> DiceTable:
                 )
             )
 
-    print(table.name, table.dice)
+        # Table data
+        else:
+            # This means create a new table
+            if line == "---":
+                tables.append(
+                    {
+                        i + 1: DEFAULT_VALUE
+
+                        # By using the len we can select the appropriate die
+                        # for this table
+                        for i in range(table.dice[len(tables)])
+                    }
+                )
+            else:
+                # split only once in case the user wants a tab in their thing
+                num, text = line.split("\t", 1)
+
+                # Update the entry.
+                tables[-1][int(num)] = text
+
+    table.tables = tuple(tables)
+
+    print(table.name, table.dice, table.tables)
     return table
 
 
