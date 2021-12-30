@@ -1,10 +1,12 @@
 # This table will be called "Table Name", require a d3 and a d4 (in that order). The tables for each die start with ---
 Table Name
 d3 d4
+
 ---
 1	Big
 2	Small
 3	Average
+
 ---
 1	Boi
 2	Girl

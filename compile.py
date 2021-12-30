@@ -44,15 +44,14 @@ def parse_tab(text: list[str]) -> DiceTable:
     Does NOT read the file, takes the contents as a list of strings.
     Runs each line through .strip()
     """
-    # Get rid of extra spaces and new lines for easier handling.
-
-    text = [l.strip() for l in text]
-
     # We need to get 3 things:
     #   Table name, Dice needed, The tables for each die.
     table = DiceTable()
 
     for line in text:
+        # Get rid of extra spaces and new lines for easier handling.
+        line = line.strip()
+
         # Skip commented out lines and empty lines.
         #
         # Empty line check first so that lazy evaluation saves us from
@@ -60,8 +59,20 @@ def parse_tab(text: list[str]) -> DiceTable:
         if not line or line[0] == COMMENT_CHAR:
             continue
 
-        print(line)
+        # These two are the first two lines
+        if table.name is None:
+            table.name = line
 
+        elif table.dice is None:
+            # Convert to a tuple of ints, must remove d from d#
+            table.dice = tuple(
+                map(
+                    int,
+                    line.replace('d', '').split()
+                )
+            )
+
+    print(table.name, table.dice)
     return table
 
 
