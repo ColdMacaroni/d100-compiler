@@ -105,6 +105,15 @@ def parse_tab(text: list[str]) -> DiceTable:
     return table
 
 
+def dicetable_to_c(dicetable: DiceTable) -> str:
+    """
+    Converts a dicetable object to a c program that has that functionality
+    """
+    base = \
+"""
+"""
+
+
 def main(files: list[str]):
     """
     Goes through the files passed as arguments and parses each tab file.
