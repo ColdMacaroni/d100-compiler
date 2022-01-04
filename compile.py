@@ -98,8 +98,16 @@ def parse_tab(text: list[str]) -> DiceTable:
                 # split only once in case the user wants a tab in their thing
                 num, text = line.split("\t", 1)
 
-                # Update the entry.
-                tables[-1][int(num)] = text
+                # - can be uses to specify range
+                # This would be a great use of case cascading but it works
+                # well enpugh for now.
+                if '-' in num:
+                    num1, num2 = sorted(map(int, num.split('-')))
+                    for n in range(num1, num2 + 1):
+                        tables[-1][n] = text
+                else:
+                    # Update the entry.
+                    tables[-1][int(num)] = text
 
     table.tables = tuple(tables)
 
