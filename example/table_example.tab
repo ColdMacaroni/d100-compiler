@@ -1,6 +1,6 @@
 # This table will be called "Table Name", require a d3 and a d4 (in that order). The tables for each die start with ---
 Table Name
-d3 d4
+d3 d5
 
 ---
 1	Big
@@ -9,6 +9,6 @@ d3 d4
 
 ---
 1	Boi
-2	Girl
-# 3	Undefined
+2-3	Girl
 4	Goblin
+# 5	Undefined
