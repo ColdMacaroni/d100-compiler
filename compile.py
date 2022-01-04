@@ -111,12 +111,13 @@ def table_to_switch(table: dict[int, str], var_name: str = "i") -> str:
     """
     switch = "switch(" + var_name + ")\n{\n"
 
-    template = "case {0}:\nprintf(\"{1}\");\nbreak;\n"
+    template = "\tcase {0}:\n\t\tprintf(\"{1}\");\n\t\tbreak;\n"
 
     for key, value in table.items():
-        switch +=
+        switch += template.format(key, value)
 
-    switch += f"default:\n\"{DEFAULT_VALUE}\";\n}"
+    # f strings are whinny so i have to add the ending bracket separately
+    switch += f"\tdefault:\n\t\tprintf(\"{DEFAULT_VALUE}\");\n" + "}"
 
     return switch
 
